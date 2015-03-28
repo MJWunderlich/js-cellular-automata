@@ -7,8 +7,10 @@ var globals = {
   gWhich: 'g',
   bWhich: 'b',
   rCoeff: 0.7,
-  gCoeff: 0.5,
-  bCoeff: 0.5
+  gCoeff: 0.7,
+  bCoeff: 0.7,
+  siblingAttenuate1: 1.0,
+  siblingAttenuate2: 0.0
 };
 
 (function(globals) {
@@ -86,30 +88,30 @@ var globals = {
           mb += db;
         }
 
-        if (sampleOuterSiblings) {
-          var p = cell, attenuate = 0.5;
+        if (sampleOuterSiblings && globals.siblingAttenuate2) {
+          var p = cell;
           for (var k in p.siblings) {
             cell = p.siblings[k];
             if (!cell) continue;
 
-            vx += cell.velocity.x * attenuate;
-            vy += cell.velocity.y * attenuate;
-            vz += cell.velocity.z * attenuate;
-            vr += cell.color.r * attenuate;
-            vg += cell.color.g * attenuate;
-            vb += cell.color.b * attenuate;
+            vx += cell.velocity.x * globals.siblingAttenuate2;
+            vy += cell.velocity.y * globals.siblingAttenuate2;
+            vz += cell.velocity.z * globals.siblingAttenuate2;
+            vr += cell.color.r * globals.siblingAttenuate2;
+            vg += cell.color.g * globals.siblingAttenuate2;
+            vb += cell.color.b * globals.siblingAttenuate2;
 
             dr = r - cell.color.r;
             dg = g - cell.color.g;
             db = b - cell.color.b;
 
-            if (dr * dr + dg * dg + db * db < minDistSquare / attenuate) {
+            if (dr * dr + dg * dg + db * db < minDistSquare * globals.siblingAttenuate2) {
               mr += dr;
               mg += dg;
               mb += db;
             }
 
-            count += attenuate;
+            count += globals.siblingAttenuate2;
           }
         }
 
@@ -137,17 +139,18 @@ var globals = {
       g += this.velocity.y;
       b += this.velocity.z;
 
+      var xxx = -Math.random();
       if (r < 0 || r > 255) {
         r = Math.min(Math.max(r, 0), 255);
-        this.velocity.x *= -Math.random();
+        this.velocity.x *= xxx;
       }
       if (g < 0 || g > 255) {
         g = Math.min(Math.max(g, 0), 255);
-        this.velocity.y *= -Math.random();
+        this.velocity.y *= xxx;
       }
       if (b < 0 || b > 255) {
         b = Math.min(Math.max(b, 0), 255);
-        this.velocity.z *= -Math.random();
+        this.velocity.z *= xxx;
       }
 
       this.color.r = r;
@@ -187,5 +190,6 @@ var globals = {
     minDistSquare = minDist * minDist,
     count,
     sampleOuterSiblings = true,
-    date = new Date();
+    date = new Date(),
+    baseDate = date.getTime();
 })(globals);

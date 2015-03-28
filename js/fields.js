@@ -4,18 +4,21 @@
 
 (function() {
 
-  window.makeField = function(name, varName, scope) {
-    var label = $('<label>').html(name);
-    var input = $('<input type="text">').val(scope[varName]).change(function() {
-      scope[varName] = $(this).val();
+  window.makeField = function(opts, scope) {
+    var label = $('<label>').html(opts.text);
+    var input = $('<input type="text">').val(scope[opts.field]).change(function() {
+      if (opts.type !== 'text')
+        scope[opts.field] = parseFloat($(this).val());
+      else
+        scope[opts.field] = $(this).val();
     });
     return $('<div>').addClass('col-full').append(label).append(input);
   };
 
   window.makeEditor = function(scope, varList) {
-    var key, editor = $('<div>').addClass('editor');
-    for (key in varList) {
-      editor.append( makeField(varList[key], key, scope) );
+    var i, key, editor = $('<div>').addClass('editor');
+    for (i=0; i<varList.length; ++i) {
+      editor.append(makeField(varList[i], scope));
     }
     return editor;
   };
