@@ -11,6 +11,12 @@
         box-sizing: border-box;
       }
 
+      h1, h2 {
+        margin: 0;
+        padding: 0;
+        font-family: Open-sans;
+      }
+
       input[type='text'] {
         display: block;
         width: 100%;
@@ -26,19 +32,37 @@
     </style>
 
   </head>
-  <body>
+  <body style="padding: 10px;">
 
-    <div style="float: left">
-      <canvas id="field" width="600px" height=350px" style="border: 1px solid black;"></canvas>
+    <h1>Cellular Automata</h1>
+    <h2>With a twist</h2>
+
+    <div>
+      <div style="float: left; width: 600px;">
+        <canvas id="field" width="600px" height=350px" style="border: 1px solid black;"></canvas>
+        <div>
+          <small>
+            <em>Original inspiration:
+              <a href="http://rectangleworld.com/blog/archives/587">A Colorful Cellular Automaton in HTML5 Canvas</a>
+            </em>
+          </small>
+          <p>
+            An Object-oriented interpretation of the above mentioned Cellular Automata idea, with a modified flocking algorithm.
+          </p>
+        </div>
+      </div>
+
+      <div style="float: left; margin-left: 20px; display:table-cell;">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <br/>
+
+        <div id="editor-wrapper">
+        </div>
+      </div>
     </div>
 
-    <div style="float: left; margin-left: 20px; display:table-cell;">
-      <button id="start">Start</button>
-      <button id="stop">Stop</button>
-      <br />
-
-      <div id="editor-wrapper">
-      </div>
+    <div style="clear: both;">
     </div>
 
     <script src="js/jquery.js"></script>

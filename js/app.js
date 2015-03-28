@@ -14,7 +14,7 @@ $(function() {
     clearInterval(displayTimer);
     field.setup();
     displayTimer = setInterval(runLoop, delay);
-  });
+  }).click();
 
   $('#stop').unbind().click(function () {
     clearInterval(displayTimer);
