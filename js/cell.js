@@ -2,7 +2,16 @@
  * Created by mjwunderlich on 3/27/15.
  */
 
-(function() {
+var globals = {
+  rWhich: 'r',
+  gWhich: 'g',
+  bWhich: 'b',
+  rCoeff: 0.7,
+  gCoeff: 0.5,
+  bCoeff: 0.5
+};
+
+(function(globals) {
 
   /**
    * Construct a new instance of Cell
@@ -26,7 +35,7 @@
 
   Cell.prototype = {
     getColor: function() {
-      return 'rgb(' + ~~(this.color[rWhich]*coeffr) + ',' + ~~(this.color[gWhich]*coeffg) + ',' + ~~(this.color[bWhich]*coeffb) + ')';
+      return 'rgb(' + ~~(this.color[globals.rWhich]* globals.rCoeff) + ',' + ~~(this.color[globals.gWhich]* globals.gCoeff) + ',' + ~~(this.color[globals.bWhich]* globals.bCoeff) + ')';
     },
     setWH: function(w, h) {
       this.w = w;
@@ -174,16 +183,9 @@
     mRecip,
     mMagnitude = 4,
     blendCoeff = 0.56,
-    elapsedAlpha,
     minDist = 8,
     minDistSquare = minDist * minDist,
     count,
     sampleOuterSiblings = true,
-    date = new Date(),
-    coeffr = 0.7,
-    coeffg = 0.5,
-    coeffb = 0.5,
-    rWhich = 'r',
-    gWhich = 'g',
-    bWhich = 'b';
-})();
+    date = new Date();
+})(globals);

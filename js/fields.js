@@ -4,20 +4,20 @@
 
 (function() {
 
-  function makeField(name, varName, scope) {
-    var label = $('<label>').text(name);
-    var input = $('<input type="text">').change(function() {
+  window.makeField = function(name, varName, scope) {
+    var label = $('<label>').html(name);
+    var input = $('<input type="text">').val(scope[varName]).change(function() {
       scope[varName] = $(this).val();
     });
     return $('<div>').addClass('col-full').append(label).append(input);
-  }
+  };
 
-  function makeEditor(scope, varList) {
+  window.makeEditor = function(scope, varList) {
     var key, editor = $('<div>').addClass('editor');
     for (key in varList) {
-      editor.append( makeField(key, key, scope) );
+      editor.append( makeField(varList[key], key, scope) );
     }
     return editor;
-  }
+  };
 
 })();

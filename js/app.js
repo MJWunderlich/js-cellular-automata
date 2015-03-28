@@ -22,6 +22,19 @@ $(function() {
   });
 
 
+  // Setup editor
+  var fields = {
+    rWhich: 'R Channel <em>use: r, g, b</em>',
+    gWhich: 'G Channel <em>use: r, g, b</em>',
+    bWhich: 'B Channel <em>use: r, g, b</em>',
+
+    rCoeff: 'R Factor',
+    gCoeff: 'G Factor',
+    bCoeff: 'B Factor'
+  };
+  var editor = makeEditor(globals, fields);
+  $('#editor-wrapper').append(editor);
+
 
   function runLoop() {
     field.display(delay);
