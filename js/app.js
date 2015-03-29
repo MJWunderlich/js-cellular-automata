@@ -68,6 +68,7 @@ $(function() {
 
   // Start running the simulation
   play();
+  updateUi();
 
   $('#start').unbind().click(function () {
     restart();
@@ -79,31 +80,9 @@ $(function() {
     updateUi();
   });
 
-  // Setup Presets
-  var presets = [
-    {
-      text: 'Black & White',
-      values: Utils.shallowExtend(globals, {
-        rWhich: 'r', gWhich: 'r', bWhich: 'r',
-        rCoeff: 1.0, gCoeff: 1.0, bCoeff: 1.0
-      })
-    }, {
-      text: 'Colorful',
-      values: Utils.shallowExtend(globals, {
-        rWhich: 'r', gWhich: 'g', bWhich: 'b',
-        rCoeff: 1.0, gCoeff: 1.0, bCoeff: 1.0
-      })
-    }, {
-      text: 'Saturated Colorful',
-      values: Utils.shallowExtend(globals, {
-        rWhich: 'r', gWhich: 'g', bWhich: 'b',
-        rCoeff: 2.0, gCoeff: 2.0, bCoeff: 2.0
-      })
-    }
-  ];
-
   // Configure fields that will appear in the editor
   var fields = [
+    /*
     {
       field: 'rWhich',
       text: 'R Channel <em>use: r, g, b</em>',
@@ -135,17 +114,59 @@ $(function() {
       type: 'float'
     },
 
+    */
     {
       field: 'samplingDepth',
       text: 'Sampling Depth (recursive)',
       type: 'float'
-    },
+    }
   ];
   var editor = makeEditor(globals, fields);
   $('#editor-wrapper').append(editor);
 
+  // Setup Presets
+  var presets = [
+    {
+      text: 'Colorful (Default)',
+      values: Utils.shallowExtend(globals, {
+        rWhich: 'r', gWhich: 'g', bWhich: 'b',
+        rCoeff: 0.7, gCoeff: 0.7, bCoeff: 0.7
+      })
+    }, {
+      text: 'Black & White',
+      values: Utils.shallowExtend(globals, {
+        rWhich: 'r', gWhich: 'r', bWhich: 'r',
+        rCoeff: 0.7, gCoeff: 0.7, bCoeff: 0.7
+      })
+    }, {
+      text: 'Red-ish',
+      values: Utils.shallowExtend(globals, {
+        rWhich: 'r', gWhich: 'g', bWhich: 'b',
+        rCoeff: 0.7, gCoeff: 0.2, bCoeff: 0.2
+      })
+    }, {
+      text: 'Green-ish',
+      values: Utils.shallowExtend(globals, {
+        rWhich: 'r', gWhich: 'g', bWhich: 'b',
+        rCoeff: 0.2, gCoeff: 0.7, bCoeff: 0.2
+      })
+    }, {
+      text: 'Blue-ish',
+      values: Utils.shallowExtend(globals, {
+        rWhich: 'r', gWhich: 'g', bWhich: 'b',
+        rCoeff: 0.2, gCoeff: 0.2, bCoeff: 0.7
+      })
+    }, {
+      text: 'Saturated Colorful',
+      values: Utils.shallowExtend(globals, {
+        rWhich: 'r', gWhich: 'g', bWhich: 'b',
+        rCoeff: 1.25, gCoeff: 1.25, bCoeff: 1.25
+      })
+    }
+  ];
+
   var presetEditor = makePresets(presets, globals);
-  $('#editor-wrapper').prepend(presetEditor);
+  $('#presets-wrapper').prepend(presetEditor);
 
   function runLoop() {
     field.display(delay);

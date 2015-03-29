@@ -25,7 +25,6 @@
 
   window.makePresets = function(presets, scope) {
     var i, key, preset, option, select = $('<select>').attr('id', 'presets');
-    select.append($('<option>'));
     for (i=0; i<presets.length; ++i) {
       preset = presets[i];
       option = $('<option>').text(preset.text).val(preset.text);
