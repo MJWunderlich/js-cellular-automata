@@ -67,7 +67,7 @@
     mr = mg = mb = 0;
     count = 0;
 
-    this._accumulateSiblings(1.0, globals.samplingDepth);
+    this._accumulateSiblings(1.0, globals.samplingDepth - 1);
 
     count2 = 1.0 / count;
     vx *= count2;
@@ -87,8 +87,7 @@
       mb *= mRecip;
     }
 
-    // Simulate some individuality
-    blendCoeff = 0.67 * Math.cos( date.getSeconds() );
+    blendCoeff = 0.67;// * Math.cos( date.getSeconds() );
     this.velocity.x += blendCoeff * (mr + vr + vx - (r + this.velocity.x));
     this.velocity.y += blendCoeff * (mg + vg + vy - (g + this.velocity.y));
     this.velocity.z += blendCoeff * (mb + vb + vz - (b + this.velocity.z));
