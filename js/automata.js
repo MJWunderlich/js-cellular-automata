@@ -14,7 +14,7 @@
   };
 
   Field.prototype._makeCell = function(x, y) {
-    return new Cell(x, y);
+    return new Cell2(x, y);
   };
 
   Field.prototype._makeRow = function(y) {
@@ -83,6 +83,10 @@
       cell = this.first;
     while (cell) {
       cell.step(elapsed);
+      cell = cell.next;
+    }
+    cell = this.first;
+    while (cell) {
       cell.render(ctx);
       cell = cell.next;
     }
