@@ -11,7 +11,7 @@ var globals = {
   bCoeff: 0.7,
   siblingAttenuate1: 1.0,
   siblingAttenuate2: 0.0,
-  samplingDepth: 0.0
+  samplingDepth: 1
 };
 
 (function(globals) {

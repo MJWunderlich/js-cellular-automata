@@ -37,16 +37,19 @@
       vg += cell.color.g * attenuation;
       vb += cell.color.b * attenuation;
 
+      // Cohesion by mapping color differences
       dr = r - cell.color.r;
       dg = g - cell.color.g;
       db = b - cell.color.b;
 
+      // But not if too different
       if (dr * dr + dg * dg + db * db < minDistSquare) {
         mr += dr;
         mg += dg;
         mb += db;
       }
 
+      // Sample neighbors (siblings) recursively, so long as depth >= 1
       if (depth > 0) {
         cell._accumulateSiblings(attenuation * 0.66667, depth - 1);
       }
@@ -56,9 +59,9 @@
   };
 
   Cell2.prototype.step = function() {
-    r = this.color.r;
-    g = this.color.g;
-    b = this.color.b;
+    r = this.colorBuffer.r;
+    g = this.colorBuffer.g;
+    b = this.colorBuffer.b;
     vx = vy = vz = 0;
     vr = vg = vb = 0;
     mr = mg = mb = 0;
@@ -71,11 +74,7 @@
     vy *= count2;
     vz *= count2;
 
-    //count2 = 1.0 / count;
-    //vr *= count2;
-    //vg *= count2;
-    //vb *= count2;
-
+    // Compute a color vector from the accumulation of all the neighbors' colors
     mRecip = 255 / Math.sqrt(vr*vr + vg*vg + vb*vb);
     vr *= mRecip;
     vg *= mRecip;
