@@ -52,6 +52,9 @@ $(function() {
   }
 
   function play() {
+    if (state == States.NONE) {
+      field.setup();
+    }
     clearInterval(displayTimer);
     displayTimer = setInterval(runLoop, delay);
     state = States.PLAYING;
@@ -62,6 +65,9 @@ $(function() {
     displayTimer = null;
     state = States.PAUSED;
   }
+
+  // Start running the simulation
+  play();
 
   $('#start').unbind().click(function () {
     restart();
