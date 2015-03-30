@@ -59,9 +59,9 @@
   };
 
   Cell2.prototype.step = function() {
-    r = this.colorBuffer.r;
-    g = this.colorBuffer.g;
-    b = this.colorBuffer.b;
+    r = this.color.r;
+    g = this.color.g;
+    b = this.color.b;
     vx = vy = vz = 0;
     vr = vg = vb = 0;
     mr = mg = mb = 0;
